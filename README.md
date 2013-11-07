@@ -1,4 +1,4 @@
 cexio
 =====
 
-API bindings to CEX.IO
+CEX.IO REST API library for https://cryptotrader.org
