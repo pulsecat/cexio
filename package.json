@@ -1,6 +1,6 @@
 {
   "name": "cexio",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CEX.IO REST API wrapper",
   "keywords": [
     "bitstamp",

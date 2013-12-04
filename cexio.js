@@ -60,7 +60,11 @@ CEXIO.prototype._request = function(method, path, data, callback, args) {
       } catch (err) {
         return callback(err);
       }
-      callback(null, json);
+      if (json.error) {
+        callback(json.error);
+      } else {
+        callback(null, json);
+      }
     });
     res.on('error', function(err) {
       callback(err);
