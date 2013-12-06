@@ -34,7 +34,7 @@ var CEXIO = function(pair, clientId, key, secret) {
 
 CEXIO.prototype._request = function(method, path, data, callback, args) {
   if (data) {
-    contentLength = data.length
+    contentLength = Buffer.byteLength(data);
   } else {
     contentLength = 0
   }
