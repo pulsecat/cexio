@@ -2,6 +2,7 @@ var querystring = require("querystring");
 var https = require('https');
 var _ = require('underscore');
 var crypto = require("crypto");
+var domain = require('domain');
 
 _.mixin({
   // compact for objects
@@ -73,7 +74,16 @@ CEXIO.prototype._request = function(method, path, data, callback, args) {
   req.setTimeout(60000,function() {
     req.abort();
   });
-  req.end(data);
+  
+  d = domain.create(); 
+  d.add(req);
+  d.on('error',function(err) {
+    console.log(err.stack);
+    callback(err.message);
+  });
+  d.run(function() {
+    req.end(data);
+  });
 }
 
 CEXIO.prototype._get = function(action, pair, callback, args) {
