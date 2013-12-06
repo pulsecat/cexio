@@ -99,7 +99,7 @@ CEXIO.prototype._post = function(action, pair, callback, args) {
   } else {
     path = '/api/' + action + '/'
   }
-  nonce = this.nonce++;
+  nonce = new Date().getTime();
   args = _.extend({nonce: nonce, key: this.key}, args);
   args = _.compactObject(args);
   var message = nonce.toString() + this.clientId + this.key
