@@ -66,9 +66,9 @@ CEXIO.prototype._request = function(method, path, data, callback, args) {
         callback(null, json);
       }
     });
-    res.on('error', function(err) {
-      callback(err);
-    });
+  });
+  req.on('error', function(err) {
+    callback(err);
   });
   req.setTimeout(60000,function() {
     req.abort();
