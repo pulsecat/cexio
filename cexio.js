@@ -25,8 +25,7 @@ var CEXIO = function(pair, clientId, key, secret) {
   this.clientId = clientId;
   this.key = key;
   this.secret = secret;
-  this.nonce = new Date().getTime()
-  self = this
+  var self = this;
   _.each(_.functions(self), function(f) {
     self[f] = _.bind(self[f], self);
   });
@@ -45,7 +44,7 @@ CEXIO.prototype._request = function(method, path, data, callback, args) {
     headers: {
       'User-Agent': 'Mozilla/4.0 (Node.js CEXIO client)',
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': contentLength,
+      'Content-Length': contentLength
     }
   };
   var req = https.request(options, function(res) {
@@ -86,7 +85,7 @@ CEXIO.prototype._get = function(action, pair, callback, args) {
     path = '/api/' + action;
   }
   path += '/?' + querystring.stringify(args);
-  this._request('get', path, undefined, callback, args)
+  this._request('get', path, undefined, callback, args);
 }
 
 CEXIO.prototype._post = function(action, pair, callback, args) {
@@ -99,7 +98,7 @@ CEXIO.prototype._post = function(action, pair, callback, args) {
   } else {
     path = '/api/' + action + '/';
   }
-  nonce = this.nonce++;
+  var nonce = new Date().getTime();
   args = _.extend({nonce: nonce, key: this.key}, args);
   args = _.compactObject(args);
   var message = nonce.toString() + this.clientId + this.key;
