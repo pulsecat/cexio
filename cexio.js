@@ -34,9 +34,9 @@ var CEXIO = function(pair, clientId, key, secret) {
 
 CEXIO.prototype._request = function(method, path, data, callback, args) {
   if (data) {
-    contentLength = data.length
+    contentLength = data.length;
   } else {
-    contentLength = 0
+    contentLength = 0;
   }
   var options = {
     host: 'cex.io',
@@ -70,7 +70,7 @@ CEXIO.prototype._request = function(method, path, data, callback, args) {
   req.on('error', function(err) {
     callback(err);
   });
-  req.setTimeout(60000,function() {
+  req.setTimeout(60000, function() {
     req.abort();
   });
   req.end(data);
@@ -81,9 +81,9 @@ CEXIO.prototype._get = function(action, pair, callback, args) {
   var path;
   if (pair) {
     assets = getAssets(pair);
-    path = '/api/' + action + '/'+assets[0]+'/'+assets[1]
+    path = '/api/' + action + '/' + assets[0] + '/' + assets[1];
   } else {
-    path = '/api/' + action
+    path = '/api/' + action;
   }
   path += '/?' + querystring.stringify(args);
   this._request('get', path, undefined, callback, args)
@@ -95,17 +95,17 @@ CEXIO.prototype._post = function(action, pair, callback, args) {
   var path;
   if (pair) {
     assets = getAssets(pair);
-    path = '/api/' + action + '/'+assets[0]+'/'+assets[1]+'/'
+    path = '/api/' + action + '/' + assets[0] + '/' + assets[1] + '/';
   } else {
-    path = '/api/' + action + '/'
+    path = '/api/' + action + '/';
   }
   nonce = this.nonce++;
   args = _.extend({nonce: nonce, key: this.key}, args);
   args = _.compactObject(args);
-  var message = nonce.toString() + this.clientId + this.key
+  var message = nonce.toString() + this.clientId + this.key;
   var hmac = crypto.createHmac("sha256", new Buffer(this.secret));
   hmac.update(message);
-  signature = hmac.digest("hex").toUpperCase()
+  signature = hmac.digest("hex").toUpperCase();
   args.signature = signature;
   var data = querystring.stringify(args);
   this._request('post', path, data, callback, args);
