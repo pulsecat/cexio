@@ -13,6 +13,7 @@ var secret = '';
 var privateAPI = new CEXIO('ghs_btc',clientId,key,secret);
 
 privateAPI.balance(console.log);
+privateAPI.get_myfee(console.log);
 privateAPI.place_order('buy',1,0.1,function(err,order) {
   if (err) {
     console.log(err);
@@ -23,7 +24,14 @@ privateAPI.place_order('buy',1,0.1,function(err,order) {
         console.log(err);
       } else {
         console.log(orders);
-        privateAPI.cancel_order(order.id,console.log);
+          privateAPI.get_order(order.id, function(err, order) {
+              if(err) {
+                  console.log(err)
+              } else {
+                  console.log(order);
+                  privateAPI.cancel_order(order.id, console.log);
+              }
+          });
       }
     });
   }
