@@ -125,51 +125,51 @@ CEXIO.prototype.trades = function(options, callback) {
     options = undefined;
   }
   this._get('trade_history', this.pair, callback, options);
+}
 /**
  * Get the results are shown according to first currency in the request.
  * @param callback
  */
-}
 
 CEXIO.prototype.ticker = function(callback) {
   this._get('ticker', this.pair, callback);
+}
 /**
  * Get recent orders
  * @param callback
  */
-}
 
 CEXIO.prototype.order_book = function(callback) {
   this._get('order_book', this.pair, callback);
+}
 //
 // Private API
 //
-
 /**
  * Obtain actual user's balance
  * @param callback
  */
-}
-
 CEXIO.prototype.balance = function(callback) {
   this._post('balance', null, callback);
+}
+
 /**
  * Obtain actual user's opened orders
  * @param callback
  */
-}
-
 CEXIO.prototype.open_orders = function(callback) {
   this._post('open_orders', this.pair, callback);
+}
+
 /**
  * Cancel order by provided id
  * @param id : order id
  * @param callback
  */
-}
-
 CEXIO.prototype.cancel_order = function(id, callback) {
   this._post('cancel_order', null, callback, {id: id});
+}
+
 /**
  * Place a new order on selected pair
  * @param type : order type
@@ -177,11 +177,9 @@ CEXIO.prototype.cancel_order = function(id, callback) {
  * @param price : price
  * @param callback
  */
-}
-
 CEXIO.prototype.place_order = function(type, amount, price, callback) {
-  this._post('place_order', this.pair, callback, {type: type, amount: amount, price: price});
-
+    this._post('place_order', this.pair, callback, {type: type, amount: amount, price: price});
+}
 /**
  * Get order info
  * @param id : order id
